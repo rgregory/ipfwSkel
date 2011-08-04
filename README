@@ -1,0 +1,17 @@
+ipfwSkel creates skeleton ipfw dynamic rulesets which may be useful for the overworked
+sysadmin. It's not particularly clever, but does support single queue creation,
+
+Usage: ipfSkel.pl <options>
+Options:
+--tcp       tcp ports to open to the world
+--udp       udp ports top open to the world
+--trusted   trusted ip or netrange to allow complete access
+--queue     allow inbound tcp destination ports (bandwidth limited)
+--limit     associated limit in kbits/sec for --queue ports
+--icmp      icmp codetypes to allow (defaults to 3,4,11)
+
+Example: Open ports 22 to the world and trust 1.2.3.0/24
+./ipfwSkel.pl --tcp 22 --trusted 1.2.3.0/24 > ipfw.rules
+
+Create a 300kbits/sec limit for port 80
+./ipfwSkel.pl --queue 80 --limit 300 > ipfw.rules
